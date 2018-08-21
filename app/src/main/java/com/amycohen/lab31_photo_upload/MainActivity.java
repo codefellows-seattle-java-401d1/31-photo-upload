@@ -2,12 +2,18 @@ package com.amycohen.lab31_photo_upload;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,5 +57,21 @@ public class MainActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",   /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

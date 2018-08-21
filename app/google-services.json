@@ -36,6 +36,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639942572649:android:92bc93a05586ac49",
+        "android_client_info": {
+          "package_name": "com.android.sooz.photouploadapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639942572649-1ebur993og1spuqfvonjnq1nksj59hkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.sooz.photouploadapp",
+            "certificate_hash": "a000b76ffdbbd59ae80e0a47fa08e4e4dd659c6b"
+          }
+        },
+        {
+          "client_id": "639942572649-35eqt44c7echbdh2ea4pk71cq2mosil9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4HQDS8dx8U_0DdghN_57hjpXjnN-TfHU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639942572649-35eqt44c7echbdh2ea4pk71cq2mosil9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

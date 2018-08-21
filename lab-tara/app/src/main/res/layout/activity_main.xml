@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10sp"
     tools:context=".MainActivity">
 
     <ImageView
@@ -11,9 +12,10 @@
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:src="@drawable/placeholder"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0sp" />
 
     <LinearLayout
         android:id="@+id/list"
@@ -26,6 +28,12 @@
         <Button
             android:id="@+id/takePicture"
             android:text="@string/take_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/savePicture"
+            android:text="@string/save_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

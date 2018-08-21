@@ -11,9 +11,11 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        try {
+            downloadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     @OnClick(R.id.take_picture)
@@ -150,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void uploadFile(Bitmap bitmap) {
-//        Uri file = Uri.parse(mCurrentPhotoPath);
         StorageReference riversRef = mStorageRef.child("photos/mostrecent.jpg");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -170,6 +178,26 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
                 exception.printStackTrace();
+            }
+        });
+    }
+
+    public void downloadFile() throws IOException {
+//        File localFile = File.createTempFile("images", "jpg");
+
+        final File localFile = File.createTempFile("Images", "bmp");
+
+        mStorageRef.child("photos/mostrecent.jpg")
+        .getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                mImageView.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
             }
         });
     }

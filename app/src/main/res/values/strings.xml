@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">UploadPhoto</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="save_picture">Save Picture</string>
+    <string name="helloWorld">Hello World</string>
+</resources>

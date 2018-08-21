@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "614854544501",
+    "firebase_url": "https://photo-upload-c414d.firebaseio.com",
+    "project_id": "photo-upload-c414d",
+    "storage_bucket": "photo-upload-c414d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614854544501:android:e99be03cf1df2a27",
+        "android_client_info": {
+          "package_name": "com.example.tyler.photoupload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614854544501-d6v06moe8qd815mck2e9nts0151odj0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tyler.photoupload",
+            "certificate_hash": "d3cf9a6adc5c066adbd0151a12bcb949ec6398b9"
+          }
+        },
+        {
+          "client_id": "614854544501-68no1dngkgk6sf5ssb8mi4pdeatkj7ck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhcv5SzngMBwtMac3WdV0wU6WXQAxiuXs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614854544501-68no1dngkgk6sf5ssb8mi4pdeatkj7ck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

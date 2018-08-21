@@ -14,6 +14,9 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_FULL_IMAGE_CAPTURE = 2;
+
+    private int pictureType;
 
     @BindView(R.id.image_view) ImageView mImageView;
     @BindView(R.id.thumbnail_button) Button mTakeThumbnail;
@@ -28,10 +31,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.thumbnail_button)
+    public void setThumbImg() {
+        pictureType = REQUEST_IMAGE_CAPTURE;
+        takePictureIntent();
+    }
+
+    @OnClick(R.id.picture_button)
+    public void setFullImg() {
+        pictureType = REQUEST_FULL_IMAGE_CAPTURE;
+        takePictureIntent();
+    }
+
     public void takePictureIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(intent, pictureType);
         }
     }
 
@@ -41,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(bitmap);
+        } else if (requestCode == REQUEST_FULL_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
         }
     }
 }

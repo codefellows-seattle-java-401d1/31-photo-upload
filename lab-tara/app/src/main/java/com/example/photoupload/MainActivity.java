@@ -11,6 +11,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        try {
+            downloadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @OnClick(R.id.takePicture)
@@ -131,12 +139,12 @@ public class MainActivity extends AppCompatActivity {
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
-        if (targetW == 0) {
-            targetW = 1;
-        }
-        if (targetH == 0) {
-            targetH = 1;
-        }
+//        if (targetW == 0) {
+//            targetW = 1;
+//        }
+//        if (targetH == 0) {
+//            targetH = 1;
+//        }
 
         // Determine how much to scale down the image
         int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
@@ -177,19 +185,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void downloadFile() {
-//        File localFile = File.createTempFile("images", "jpg");
-//        mStorageRef.getFile(localFile)
-//        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//
-//            }
-//        });
+    public void downloadFile() throws IOException {
+        final File localFile = File.createTempFile("Images", "bmp");
+
+        mStorageRef.child("photos/mostrecent.jpg")
+        .getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                mImageView.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

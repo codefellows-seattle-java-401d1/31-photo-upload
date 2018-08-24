@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "362514245326",
+    "firebase_url": "https://lab-tara.firebaseio.com",
+    "project_id": "lab-tara",
+    "storage_bucket": "lab-tara.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362514245326:android:ea38ee36e6ce391b",
+        "android_client_info": {
+          "package_name": "com.example.photoupload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362514245326-i0n9vssk5dpvl42r634bl7baibug8t0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.photoupload",
+            "certificate_hash": "ed5027f0ebbce23b156fa68352d62e6c5816540d"
+          }
+        },
+        {
+          "client_id": "362514245326-u1lnq2iqfrsd5csr772nkk1lpmn5ocab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7UWAgjUXrly0enzyn0z-O77kGCGAK4dc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362514245326-u1lnq2iqfrsd5csr772nkk1lpmn5ocab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,82 +1,29 @@
-# ![CF](http://i.imgur.com/7v5ASc8.png) Photo Uploader
+#PhotoApp
 
-## Resources  
-* [Taking Photos Simply in Android](https://developer.android.com/training/camera/photobasics.html)
-* [Upload Files Android Firebase](https://firebase.google.com/docs/storage/android/upload-files)
-* [Download Files Android Firebase](https://firebase.google.com/docs/storage/android/download-files)
+##Overview
+This application is to work on using ButterKnife and Firebase Storage. 
 
-Here's a simple lab to get you used to interacting with Android's camera via
-intents, saving photos to files and uploading photos to Firebase Storage.
 
-Build an app that allows people to take a picture and upload a photo to
-Firebase Storage. The application should download the image when the user loads
-the app again. Store the image at a consistent location like:
+##Screenshots
 
-```
-mStorageRef.child("photos/mostrecent.jpg")
-```
+**Internal Editor View**
 
-Follow the "Taking Photos Simply in Android" guide carefully to create files to
-store the photo, to read the photos from a file, to decode and scale the image.
+[Main start view](/Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/introscreenshot_photoapp.png)
 
-Here are several code snippets useful for interacting with files, images,
-bitmaps, uploading and downloading.
+[Take picture view](/Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/takephoto_withcamera.png)
 
-Remember to replace the package name with your own apps package name!
+[Result picture view](/Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/resultscreen_takepicture.png)
 
-#### Compressing A File for Upload
-```java
-ByteArrayOutputStream baos = new ByteArrayOutputStream();
-bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-byte[] data = baos.toByteArray();
-```
+[Save picture view start](/Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/savepicture_lauch.png)
 
-#### Decoding A File for Download
-```java
-public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-    mImageView.setImageBitmap(bitmap);
-}
-```
+[Camera crash view when saving pic](//Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/cameracrashed.png)
 
-#### Prevent Divide By Zero Errors
-It's possible your layout might make your `ImageView` end up with zero width,
-or zero height. If you see any divide-by-zero errors consider using if
-statements to convert the width and height scale to one. This may not be
-necessary, but you may need it!
+[app still running view](/Users/sooz/codefellows/401Java/Labs/31-photo-upload/screenshots/appstillrunning_aftercamerasavecrash.png)
 
-```java
-if (targetW == 0) {
-  targetW = 1;
-}
 
-if (targetH == 0) {
-  targetH = 1;
-}
+##Credits/Resources
 
-// Determine how much to scale down the image
-int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-```
+__Thanks to:__
 
-#### Firebase Read/Write Errors
-If you see an error about Firebase read/write permissions you may need to
-navigate to the Firebase console, go to Storage, go to Rules and configure the
-rules so it returns true for read and write, like below:
-
-```js
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if true; //request.auth != null;
-    }
-  }
-}
-```
-
-## Submission Instructions
-* Work in a fork of this repository
-* Work in a branch on your fork
-* Write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-susan`
-* Open a pull request to this repository
-* Submit on canvas a question and observation, how long you spent, and a link to
-  your pull request
+- Instructor Steve Geluso
+- TAs: Casey Cady

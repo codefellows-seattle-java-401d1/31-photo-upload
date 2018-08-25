@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="0sp"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:layout_margin="15sp"
@@ -22,7 +22,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
-        android:padding="50sp"
+        android:paddingRight="50sp"
+        android:paddingLeft="50sp"
+        android:paddingTop="25sp"
         android:textAlignment="center"
         android:text="@string/welcome_to_photoapp"
         app:layout_constraintTop_toBottomOf="@id/imageView" />

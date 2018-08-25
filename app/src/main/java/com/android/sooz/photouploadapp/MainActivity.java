@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_SAVE_PHOTO = 2;
 
 
-    private String mCurrentPhotoPath;
+    String mCurrentPhotoPath;
 
     //store most recent picture taken
     private StorageReference mStorageRef;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     //use ButterKnife annotations to attach onClickListener to button
     @OnClick(R.id.take_picture)
-    public void dispatchTakePictureIntent(){
+    public void takePicture(){
         Intent takePictureIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
         if(takePictureIntent.resolveActivity(getPackageManager()) != null){
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -76,11 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
     //use ButterKnife annotations to attach onClickListener to button
     @OnClick(R.id.save_picture)
-    public void dispatchSavePictureIntent(){
-
-        Intent savePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    public void dispatchTakePictureIntent(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        if (savePictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
@@ -94,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.android.sooz.photouploadapp",
                         photoFile);
-                savePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(savePictureIntent, REQUEST_SAVE_PHOTO);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_SAVE_PHOTO);
             }
         }
     }
@@ -169,11 +168,11 @@ public class MainActivity extends AppCompatActivity {
 
         //in case either target value is 0
         if(targetHeight == 0){
-            targetHeight = targetWidth;
+            targetHeight = 1;
         }
 
         if(targetWidth == 0){
-            targetWidth = targetHeight;
+            targetWidth = 1;
         }
 
         //determine how much to scale down/up image
@@ -192,14 +191,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //error troubleshooting - trying solution provided on StackOverflow here:
+    //https://stackoverflow.com/questions/39614176/unable-to-create-firebase-storage-network-request-android-os-remoteexception-whi
+    //error message: '/FileDownloadTask: Unable to create firebase storage network request.\n    android.os.RemoteException'
+
     public void uploadFile(Bitmap bitmap){
-        StorageReference photosRef = mStorageRef.child("photos/mostrecent.jpg");
+        StorageReference riversRef = mStorageRef.child("photos/" + mCurrentPhotoPath + ".bmp");
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
         byte[] data = byteArrayOutputStream.toByteArray();
 
-        photosRef.putBytes(data)
+        riversRef.putBytes(data)
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

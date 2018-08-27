@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">lab31-photo-upload</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="save_picture">Save Picture</string>
+</resources>

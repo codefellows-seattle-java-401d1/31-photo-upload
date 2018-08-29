@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "186447901933",
+    "firebase_url": "https://pictures-860c2.firebaseio.com",
+    "project_id": "pictures-860c2",
+    "storage_bucket": "pictures-860c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186447901933:android:87cb48e772b92c0a",
+        "android_client_info": {
+          "package_name": "droid.yutani.com.a31_photo_upload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186447901933-rc4p31spao69k412ub5l9ja4dc4sinl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "droid.yutani.com.a31_photo_upload",
+            "certificate_hash": "255e02e52981b0fe41dd951f39074ae37ad7818e"
+          }
+        },
+        {
+          "client_id": "186447901933-sub5nbk0dh1ljs788m1k15s8080g2vi1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQpjXJv6s-M9Mvs_BO6TxfHdR7YxbRKNA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186447901933-sub5nbk0dh1ljs788m1k15s8080g2vi1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

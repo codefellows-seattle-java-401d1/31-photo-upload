@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="0sp"
+        android:layout_width="140sp"
+        android:layout_height="140sp"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:src="@drawable/placeholder"

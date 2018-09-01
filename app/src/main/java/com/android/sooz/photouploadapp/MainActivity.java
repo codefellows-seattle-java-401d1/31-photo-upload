@@ -37,6 +37,8 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_SAVE_PHOTO = 2;
+
     public String mCurrentPhotoPath;
 
     private StorageReference mStorageRef;
@@ -50,9 +52,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         ButterKnife.bind(this);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        try {
+            downloadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -121,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
+                ".bmp",         /* suffix */
                 storageDir      /* directory */
         );
 
@@ -130,16 +138,17 @@ public class MainActivity extends AppCompatActivity {
         return image;
     }
 
-    private void galleryAddPic(){
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File file = new File(mCurrentPhotoPath);
-
-        Uri contentUri = Uri.fromFile(file);
-
-        mediaScanIntent.setData(contentUri);
-
-        this.sendBroadcast(mediaScanIntent);
-    }
+//    //currently not in use but may be used at a later date
+//    private void galleryAddPic(){
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File file = new File(mCurrentPhotoPath);
+//
+//        Uri contentUri = Uri.fromFile(file);
+//
+//        mediaScanIntent.setData(contentUri);
+//
+//        this.sendBroadcast(mediaScanIntent);
+//    }
 
     private void setPictureFromFile(){
 
@@ -155,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
         BitmapFactory.decodeFile(mCurrentPhotoPath, bitmapOptions);
 
         //set dimensions of picture
-        int photoWidth = bitmapOptions.outWidth;
-        int photoHeight = bitmapOptions.outHeight;
+        int photoWidth = bitmapOptions.outWidth/2;
+        int photoHeight = bitmapOptions.outHeight/2;
 
         //in case the the target Height is 0
         if(targetHeight == 0){
@@ -180,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void uploadFile(Bitmap bitmap){
-        StorageReference riversRef = mStorageRef.child("photos/mostrecent.jpg");
+        StorageReference riversRef = mStorageRef.child("photos");
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
@@ -202,28 +211,28 @@ public class MainActivity extends AppCompatActivity {
             });
     }
 
-    //for potential future use.
-//    public void downloadFIle(Bitmap bitmap){
-//
-//        File localFile = File.createTempFile("images", "jpg");
-//
-//        mStorageRef.getFile(localFile)
-//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                        // Successfully downloaded data to local file
-//                        String successmsg = "file downloaded successfully";
-//                        Log.d("successmsg", successmsg);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                exception.printStackTrace();
-//            }
-//        });
-//
-//    }
 
+    public void downloadFile() throws IOException{
 
+        final File localFile = File.createTempFile("images", "bmp");
 
+        mStorageRef.child("photos/mostrecent.bmp")
+                .getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+
+                        // Successfully downloaded data to local file
+                        String successmsg = "file downloaded successfully";
+                        Log.d("successmsg", successmsg);
+
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        exception.printStackTrace();
+            }
+        });
+    }
 }

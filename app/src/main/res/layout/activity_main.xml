@@ -8,23 +8,25 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="140sp"
-        android:layout_height="140sp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
+        android:layout_width="wrap_content"
+        android:layout_height="200sp"
+        android:scaleType="fitCenter"
+        android:paddingLeft="35sp"
         android:src="@drawable/placeholder"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="48dp" />
 
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:text="@string/welcome_to_photoapp"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
-        android:padding="10sp"
-        android:textAlignment="center"
-        android:text="@string/welcome_to_photoapp"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        tools:layout_editor_absoluteX="23dp" />
 
     <LinearLayout
         android:id="@+id/buttons_list"

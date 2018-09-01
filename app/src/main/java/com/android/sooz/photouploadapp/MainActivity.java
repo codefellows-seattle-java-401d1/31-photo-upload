@@ -37,6 +37,8 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_SAVE_PHOTO = 2;
+
     public String mCurrentPhotoPath;
 
     private StorageReference mStorageRef;
@@ -50,9 +52,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         ButterKnife.bind(this);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        try {
+            downloadFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -202,28 +210,28 @@ public class MainActivity extends AppCompatActivity {
             });
     }
 
-    //for potential future use.
-//    public void downloadFIle(Bitmap bitmap){
-//
-//        File localFile = File.createTempFile("images", "jpg");
-//
-//        mStorageRef.getFile(localFile)
-//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                        // Successfully downloaded data to local file
-//                        String successmsg = "file downloaded successfully";
-//                        Log.d("successmsg", successmsg);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                exception.printStackTrace();
-//            }
-//        });
-//
-//    }
 
+    public void downloadFile() throws IOException{
 
+        final File localFile = File.createTempFile("images", "bmp");
 
+        mStorageRef.child("photos/mostrecent.jpg")
+                .getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+
+                        // Successfully downloaded data to local file
+                        String successmsg = "file downloaded successfully";
+                        Log.d("successmsg", successmsg);
+
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        exception.printStackTrace();
+            }
+        });
+    }
 }

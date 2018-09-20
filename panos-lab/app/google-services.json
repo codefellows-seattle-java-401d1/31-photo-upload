@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "531272156628",
+    "firebase_url": "https://panos-lab.firebaseio.com",
+    "project_id": "panos-lab",
+    "storage_bucket": "panos-lab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531272156628:android:f7b9f271cc78b71a",
+        "android_client_info": {
+          "package_name": "com.example.panos.photo_upload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531272156628-nne1hcngd78nh4vggtq7gomo7hp5an51.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.panos.photo_upload",
+            "certificate_hash": "a4339c7ea0dcd2b75e86e7377b951cea9d94de6c"
+          }
+        },
+        {
+          "client_id": "531272156628-nemjke9hu7a0ju0eh28o67g9a2cui9ev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWWvKtZJ1ZfRvhMvz2Xzv7JPhtziTSE2E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531272156628-nemjke9hu7a0ju0eh28o67g9a2cui9ev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
